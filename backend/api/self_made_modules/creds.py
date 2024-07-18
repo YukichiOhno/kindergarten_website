@@ -1,5 +1,5 @@
 class Creds:
-    connection_string = "cis3368spring.cb0eqkk045ol.us-east-1.rds.amazonaws.com"
-    user_name = "angeloangel"
-    password = "angelopassword"
-    database_name = "cis3368springdb"
+    connection_string = "127.0.0.1"
+    user_name = "root"
+    password = "angelopassword2002"
+    database_name = "kindergarten"

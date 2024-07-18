@@ -14,6 +14,3 @@ npm install express
 npm install ejs
 npm install axios
 node server.js
-
-# Issues
-need a new host
