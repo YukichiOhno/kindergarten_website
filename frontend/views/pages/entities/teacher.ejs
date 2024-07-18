@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <%- include('../../partials/head'); %>
+        <script src="teacherspace.js" defer></script>
+    </head>
+
+    <body>
+        <header>
+            <%- include('../../partials/header'); %>
+        </header>
+
+        <main>
+            <h1>Teacher</h1>
+            <!--If Teacher and Classroom exists, render a table; otherwise throw an error paragraph-->
+            <% if ((typeof teacher !== "undefined" && typeof classroom !== "undefined") && (teacher && classroom)) { %>
+
+                <!-- Find classroom capacity -->
+                <div class="find-room-capacity">
+                    <h2>Find Room Capacity</h2>
+                    <p>Note that a newly made classroom's information will not appear unless a teacher is added</p>
+                    <table>
+                        <tr>
+                            <th><label for="findRoom">Classroom: </label></th>
+                            <th><label for="findSpaces">Space Amount: </label></th>
+                            <th><label for="findTeacherAmt">Total Teachers: </label></th>
+                            <th><label for="findSpaceRemain">Spaces Remaining: </label></th>
+                        </tr>
+                        <tr>
+                            <td>
+                                <select name="findRoom" id="findRoom">
+                                    <% for (let instance of classroom) { %>
+                                        <option value="<%= instance["CLASS_ID"] %>"><%= instance["CLASS_NAME"] %></option>
+                                    <% } %>
+                                </select>
+                            </td>
+                            <td>
+                                <input type="text" id="findSpaces" name="findSpaces" readonly>
+                            </td>
+                            <td>
+                                <input type="text" id="findTeacherAmt" name="findTeacherAmt" readonly>
+                            </td>
+                            <td>
+                                <input type="text" id="findSpaceRemain" name="findSpaceRemain" readonly>
+                            </td>
+                        </tr>
+                    </table>
+                    <br>
+                    <button id="clickSpaceInfo">Find Space</button>
+                </div>
+
+                <div class="entity-forms">
+                    <!--Add a Teacher-->
+                    <form action="/add_teacher" method="post">
+                        <h2>Add</h2>
+                        <ul>
+                            <li>
+                                <label for="TEACHER_FNAME">First Name: </label>
+                                <input type="text" id="TEACHER_FNAME" name="TEACHER_FNAME" required>
+                            </li>
+                            <li>
+                                <label for="TEACHER_LNAME">Last Name: </label>
+                                <input type="text" id="TEACHER_LNAME" name="TEACHER_LNAME" required>
+                            </li>
+                            <li>
+                                <label for="CLASS_ID">Classroom: </label>
+                                <select name="CLASS_ID" id="CLASS_ID">
+                                    <% for (let instance of classroom) { %>
+                                        <option value="<%= instance["CLASS_ID"] %>"><%= instance["CLASS_NAME"] %></option>
+                                    <% } %>
+                                </select>
+                            </li>
+                            <li>
+                                <button type="submit">Add</button>
+                            </li>
+                        </ul>
+                    </form>
+
+                    <!--Update Teacher-->
+                    <form action="/update_teacher" method="post">
+                        <h2>Update</h2>
+                        <ul>
+                            <li>
+                                <label for="updateTeacherChoice">Teacher: </label>
+                                <select name="choice" id="updateTeacherChoice" required>
+                                    <option value=""></option>
+                                    <% for (let instance of classroom) { %>
+                                        <optgroup label="<%= instance["CLASS_NAME"]%>">
+                                            <% for (let jnstance of teacher) { %>
+                                                <% if (instance["CLASS_ID"] == jnstance["CLASS_ID"]) { %>
+                                                    <option value="<%= jnstance["TEACHER_ID"]%>">
+                                                        <%= jnstance["TEACHER_FNAME"]%> 
+                                                        <%= jnstance["TEACHER_LNAME"]%>
+                                                    </option>
+                                                <% } %>
+                                            <% } %>
+                                        </optgroup>
+                                    <% } %>
+                                </select>
+                            </li>
+                            <li>
+                                <label for="TEACHER_FNAME2">First Name: </label>
+                                <input type="text" id="TEACHER_FNAME2" name="TEACHER_FNAME">
+                            </li>
+                            <li>
+                                <label for="TEACHER_LNAME2">Last Name: </label>
+                                <input type="text" id="TEACHER_LNAME2" name="TEACHER_LNAME">
+                            </li>
+                            <li>
+                                <label for="CLASS_ID2">Classroom: </label>
+                                <select name="CLASS_ID" id="CLASS_ID2">
+                                    <option value=""></option>
+                                    <% for (let instance of classroom) { %>
+                                        <option value="<%= instance["CLASS_ID"] %>"><%= instance["CLASS_NAME"] %></option>
+                                    <% } %>
+                                </select>
+                            </li>
+                            <li>
+                                <button type="submit">Update</button>
+                            </li>
+                        </ul>
+                    </form>
+
+                    <!-- Delete a teacher -->
+                    <form action="/delete_teacher" method="post">
+                        <h2>Delete</h2>
+                        <ul>
+                            <li>
+                                <label for="deleteTeacherChoice">Teacher: </label>
+                                <select name="choice" id="deleteTeacherChoice" required>
+                                    <option value=""></option>
+                                    <% for (let instance of classroom) { %>
+                                        <optgroup label="<%= instance["CLASS_NAME"]%>">
+                                            <% for (let jnstance of teacher) { %>
+                                                <% if (instance["CLASS_ID"] == jnstance["CLASS_ID"]) { %>
+                                                    <option value="<%= jnstance["TEACHER_ID"]%>">
+                                                        <%= jnstance["TEACHER_FNAME"]%> 
+                                                        <%= jnstance["TEACHER_LNAME"]%>
+                                                    </option>
+                                                <% } %>
+                                            <% } %>
+                                        </optgroup>
+                                    <% } %>
+                                </select>
+                            </li>
+                            <li>
+                                <button type="submit">Delete</button>
+                            </li>
+                        </ul>
+                    </form>
+                </div>
+                <!--Quick Table Summary: Get All-->
+                <table class="get sortable">
+                    <tr>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Assigned Classroom</th>
+                    </tr>
+                    <% const teacherReversed = teacher.slice().reverse() %>
+                    <% for (let instance of teacherReversed) { %>
+                        <tr>
+                            <td><%= instance["TEACHER_FNAME"] %></td>
+                            <td><%= instance["TEACHER_LNAME"] %></td>
+                            <% for (let jnstance of classroom) { %>
+                                <% if (instance["CLASS_ID"] == jnstance["CLASS_ID"]) { %>
+                                    <td><%= jnstance["CLASS_NAME"] %></td>
+                                <% } %>
+                            <% } %>
+                        </tr>
+                    <% } %> 
+                </table>
+            <% } else { %>
+                <p>No data in the table exists</p>
+            <% } %>
+        </main>
+    </body>
+</html>

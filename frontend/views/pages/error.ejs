@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <%- include('../partials/head'); %>
+    </head>
+
+    <body>
+        <main class="error">
+            <% if (typeof login !== 'undefined' && login) { %>
+                <p>Credentials incorrrect</p>
+                <p><a href="/">Retry</a></p>
+            <% } %>
+
+            <!-- Facility Get Error -->
+            <% if (typeof facilityError !== 'undefined' && facilityError) { %>
+                <p><%= facilityError %></p>
+                <a href="/facility">Retry</a>
+            <% } %>
+
+            <!-- Facility Add Error -->
+            <% if (typeof facilityAddError !== 'undefined' && facilityAddError) { %>
+                <p>You entered: <%= addFacility["FACILITY_NAME"] %></p>
+                <p>Problem: <%= addFacilityStatement %></p>
+                <a href="/facility">Retry</a>
+            <% } %>
+
+            <!-- Facility Update Error: Non-existent Name -->
+            <% if (typeof updateFacilityError !== 'undefined' && updateFacilityError) { %>
+                <p><%= updateFacilityError %></p>
+                <a href="/facility">Retry</a>
+            <% } %>
+
+            <!-- Facility Update Error: API Side -->
+            <% if (typeof facilityUpdateError !== 'undefined' && facilityUpdateError) { %>
+                <p>You entered: <%= userFacility["FACILITY_NAME"] %></p>
+                <p>Problem: <%= updateFacilityStatement %></p>
+                <a href="/facility">Retry</a>
+            <% } %>
+
+            <!-- Facility Delete Error: Non-existent Name -->
+            <% if (typeof deleteFacilityError !== 'undefined' && deleteFacilityError) { %>
+                <p><%= deleteFacilityError %></p>
+                <a href="/facility">Retry</a>
+            <% } %>
+
+            <!-- Facility Delete Error: API Side -->
+            <% if (typeof facilityDeleteError !== 'undefined' && facilityDeleteError) { %>
+                <p>You entered: <%= userFacility["FACILITY_NAME"] %></p>
+                <p>Problem: <%= deleteFacilityStatement %></p>
+                <a href="/facility">Retry</a>
+            <% } %>
+
+            <!-- Classroom Get Error -->
+            <% if (typeof classroomError !== 'undefined' && classroomError) { %>
+                <p><%= classroomError %></p>
+                <a href="/classroom">Retry</a>
+            <% } %>
+
+            <!-- Classroom Add Error -->
+            <% if (typeof classroomAddError !== 'undefined' && classroomAddError) { %>
+                <p>You entered: <%= addClassroom["CLASS_NAME"] %> and <%= addClassroom["CLASS_CAPACITY"] %></p>
+                <p>Problem: <%= addClassroomStatement %></p>
+                <a href="/classroom">Retry</a>
+            <% } %>
+
+            <!-- Classroom Update Error: Non-existent Name -->
+            <% if (typeof updateClassroomError !== 'undefined' && updateClassroomError) { %>
+                <p><%= updateClassroomError %></p>
+                <a href="/classroom">Retry</a>
+            <% } %>
+
+            <!-- Classroom Update Error: API Side -->
+            <% if (typeof classroomUpdateError !== 'undefined' && classroomUpdateError) { %>
+                <p>You entered: <%= userClassroom["CLASS_NAME"] %></p>
+                <p>Problem: <%= updateClassroomStatement %></p>
+                <a href="/classroom">Retry</a>
+            <% } %>
+
+            <!-- Classroom Delete Error: Non-existent Name -->
+            <% if (typeof deleteClassroomError !== 'undefined' && deleteClassroomError) { %>
+                <p><%= deleteClassroomError %></p>
+                <a href="/classroom">Retry</a>
+            <% } %>
+
+            <!-- Classroom Delete Error: API Side -->
+            <% if (typeof classroomDeleteError !== 'undefined' && classroomDeleteError) { %>
+                <p>Problem: <%= deleteClassroomStatement %></p>
+                <a href="/classroom">Retry</a>
+            <% } %>
+
+            <!-- Teacher Get Error -->
+            <% if (typeof teacherError !== 'undefined' && teacherError) { %>
+                <p><%= teacherError %></p>
+                <a href="/teacher">Retry</a>
+            <% } %>
+
+            <!-- Teacher Add Error -->
+            <% if (typeof teacherAddError !== 'undefined' && teacherAddError) { %>
+                <p>You entered: <%= addTeacher["TEACHER_FNAME"] %> <%= addTeacher["TEACHER_LNAME"] %></p>
+                <p>Problem: <%= addTeacherStatement %></p>
+                <a href="/teacher">Retry</a>
+            <% } %>
+
+            <!-- Teacher Update Error: Non-existent Name -->
+            <% if (typeof updateTeacherError !== 'undefined' && updateTeacherError) { %>
+                <p><%= updateTeacherError %></p>
+                <a href="/teacher">Retry</a>
+            <% } %>
+
+            <!-- Teacher Update Error: API Side -->
+            <% if (typeof teacherUpdateError !== 'undefined' && teacherUpdateError) { %>
+                <p>Problem: <%= updateTeacherStatement %></p>
+                <a href="/teacher">Retry</a>
+            <% } %>
+
+            <!-- Teacher Delete Error: Non-existent Name -->
+            <% if (typeof deleteTeacherError !== 'undefined' && deleteTeacherError) { %>
+                <p><%= deleteTeacherError %></p>
+                <a href="/teacher">Retry</a>
+            <% } %>
+
+            <!-- Teacher Delete Error: API Side -->
+            <% if (typeof teacherDeleteError !== 'undefined' && teacherDeleteError) { %>
+                <p>Problem: <%= deleteTeacherStatement %></p>
+                <a href="/teacher">Retry</a>
+            <% } %>
+
+            <!-- Child Get Error -->
+            <% if (typeof childError !== 'undefined' && childError) { %>
+                <p><%= childError %></p>
+                <a href="/child">Retry</a>
+            <% } %>
+
+            <!-- Child Add Error -->
+            <% if (typeof childAddError !== 'undefined' && childAddError) { %>
+                <p>You entered: <%= addChild["CHILD_FNAME"] %> <%= addChild["CHILD_LNAME"] %> <%= addChild["CHILD_AGE"] %></p>
+                <p>Problem: <%= addChildStatement %></p>
+                <a href="/child">Retry</a>
+            <% } %>
+
+            <!-- Child Update Error: Non-existent Name -->
+            <% if (typeof updateChildError !== 'undefined' && updateChildError) { %>
+                <p><%= updateChildError %></p>
+                <a href="/child">Retry</a>
+            <% } %>
+
+            <!-- Child Update Error: API Side -->
+            <% if (typeof childUpdateError !== 'undefined' && childUpdateError) { %>
+                <p>Problem: <%= updateChildStatement %></p>
+                <a href="/child">Retry</a>
+            <% } %>
+
+            <!-- Child Delete Error: Non-existent Name -->
+            <% if (typeof deleteChildError !== 'undefined' && deleteChildError) { %>
+                <p><%= deleteChildError %></p>
+                <a href="/child">Retry</a>
+            <% } %>
+
+            <!-- Child Delete Error: API Side -->
+            <% if (typeof childDeleteError !== 'undefined' && childDeleteError) { %>
+                <p>Problem: <%= deleteChildStatement %></p>
+                <a href="/child">Retry</a>
+            <% } %>
+        </main>
+    </body>
+</html>
