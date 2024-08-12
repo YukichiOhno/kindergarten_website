@@ -23,3 +23,7 @@ npm install ejs
 npm install axios
 
 node server.js
+
+
+# Purpose
+A Fullstack project involving 
